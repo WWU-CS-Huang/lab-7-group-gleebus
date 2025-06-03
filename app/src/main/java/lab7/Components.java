@@ -4,11 +4,30 @@
 package lab7;
 
 public class Components {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
+    private HashTable<Character, Integer> map = new HashTable<Character, Integer>();
+    private Heap<JTree, Integer> heap = new Heap<JTree, Integer>();
 
     public static void main(String[] args) {
-        System.out.println(new Components().getGreeting());
+        Components c = new Components();
+        c.countFrequencies("aaabbc");
+        c.map.dump();
+    }
+
+
+    public void countFrequencies(String input) {
+        if (input.length() == 0) {
+            return;
+        }
+
+        char first = input.charAt(0);
+        
+        if (map.containsKey(first)) {
+            map.put(first, map.get(first)+1);
+        } else {
+            map.put(first, 1);
+        }
+
+        countFrequencies(input.substring(1));
     }
 }
