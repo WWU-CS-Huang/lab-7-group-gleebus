@@ -16,6 +16,7 @@ public class JTree {
         public int frequency;
         public Entry leftChild;
         public Entry rightChild;
+        public Entry parent;
 
         Entry(Character v, int f) {
             value = v;
