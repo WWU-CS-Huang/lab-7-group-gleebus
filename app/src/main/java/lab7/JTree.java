@@ -9,7 +9,7 @@ package lab7;
 
 // JTree is used to construct our code tree, with entries and other JTrees linked together 
 public class JTree {
-    Entry root;
+    public Entry root;
 
     class Entry {
         public Character value;
@@ -38,15 +38,54 @@ public class JTree {
     public JTree(Character v, int f) {
         Entry j = new Entry(v, f);
         root = j;
+        j.parent = null;
     }
 
     public JTree(Entry left, Entry right) {
         int combinedFreq = left.frequency + right.frequency;
         Entry j = new Entry(null, combinedFreq, left, right);
+        left.parent = j;
+        right.parent = j;
         root = j;
+        j.parent = null;
     }
 
     public int getTreeFreq() {
         return root.frequency;
     }
+
+    public String decode(String bitstring) {
+        String retString = "";
+        Entry currentNode = root;
+
+        while (!(bitstring.equals(""))) {
+            // go left
+            if (bitstring.charAt(0) == '0') {
+                currentNode = currentNode.leftChild;
+
+                // if we have a non-null value, we've reached the leaf
+                if (currentNode.value != null) {
+                    retString += currentNode.value;
+                    currentNode = root;
+                }
+
+            // go right
+            } else if (bitstring.charAt(0) == '1') {
+                currentNode = currentNode.rightChild;
+
+                // if we have a non-null value, we've reached the leaf
+                if (currentNode.value != null) {
+                    retString += currentNode.value;
+                    currentNode = root;
+                }
+
+            } else {
+                //invalid input
+                return "Invalid input";
+            }
+
+            bitstring = bitstring.substring(1);
+        }
+        return retString;
+    }    
 }
