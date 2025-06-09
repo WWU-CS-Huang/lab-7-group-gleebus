@@ -14,24 +14,7 @@ public class Components {
     private Heap<JTree, Integer> heap = new Heap<JTree, Integer>();
     private JTree huffTree;
 
-    public static void main(String[] args) throws FileNotFoundException{
-        /*
-            Components c = new Components();
-            c.countFrequencies("aaabbc");
-            c.setupTree();
-            String wubba = c.decode("011110");
-            System.out.println("decoding for \"011110\" is " + wubba);
-            String gungus = c.encode("cab");
-            System.out.println("encoding for \"cab\" is " + gungus);
-
-            String badDecode = c.decode("17");
-            System.out.println("Output when given a bad bitstring (17) to decode is: " + badDecode);
-
-            String badEncode = c.encode("k");
-            System.out.println("Output when given a bad string (k) to encode is: " + badEncode);
-        */
-
-        
+    public static void main(String[] args) throws FileNotFoundException{      
         Components c = new Components();
 
         Scanner sc = new Scanner(new File(args[0]));
@@ -97,10 +80,12 @@ public class Components {
         huffTree.buildMap();
     }
 
+    // call the huffTree decode function
     public String decode(String input) {
         return huffTree.decode(input);
     }
 
+    // call the huffTree encode function
     public String encode(String input) {
         return huffTree.encode(input);
     }

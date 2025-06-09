@@ -13,6 +13,7 @@ public class JTree {
     public Entry root;
     public HashMap<Character, String> map = new HashMap<Character, String>();
 
+    // the nodes in our tree
     class Entry {
         public Character value;
         public int frequency;
@@ -57,7 +58,7 @@ public class JTree {
     }
 
     // give it a bitstring, it spits out the encoding
-    // if you give anything other than 0 or 1, it spits out "invalid input"
+    // if you give anything other than 0 or 1, it spits out an invalid input line
     public String decode(String bitstring) {
         String retString = "";
         Entry currentNode = root;
@@ -93,6 +94,8 @@ public class JTree {
         return retString;
     }    
 
+    // given a string, it spits out the decoding
+    // if you give anything not in the tree, it spits out an invalid input line
     public String encode(String input) {
         String retVal = "";
 
