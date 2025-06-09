@@ -5,6 +5,9 @@
  */
 package lab7;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Components {
     private HashMap<Character, Integer> map = new HashMap<Character, Integer>();
@@ -12,11 +15,41 @@ public class Components {
     private JTree huffTree;
 
     public static void main(String[] args) {
+        /*
+            Components c = new Components();
+            c.countFrequencies("aaabbc");
+            c.setupTree();
+            String wubba = c.decode("011110");
+            System.out.println("decoding for \"011110\" is " + wubba);
+            String gungus = c.encode("cab");
+            System.out.println("encoding for \"cab\" is " + gungus);
+
+            String badDecode = c.decode("17");
+            System.out.println("Output when given a bad bitstring (17) to decode is: " + badDecode);
+
+            String badEncode = c.encode("k");
+            System.out.println("Output when given a bad string (k) to encode is: " + badEncode);
+        */
+
+        
         Components c = new Components();
-        c.countFrequencies("aaabbc");
+
+        //Scanner sc = new Scanner(new File("Sample.txt"));
+
+        //String input = sc.nextLine();
+        String input = "i love making files it's so fun";
+
+        c.countFrequencies(input);
         c.setupTree();
-        String wubba = c.decode("011");
-        System.out.println(wubba);
+        String encodedInput = c.encode(input);
+        String decodedEncode = c.decode(encodedInput);
+
+        if (input.length() < 100) {
+            System.out.println("Input string: " + input);
+            System.out.println("Encoded bitstring: " + encodedInput);
+            System.out.println("Decoding of the encoded bitstring: " + decodedEncode);
+       }
+       
     }
 
     // count frequencies. we add all the characters and their corresponding 
@@ -55,6 +88,7 @@ public class Components {
         }
 
         huffTree = heap.poll();
+        huffTree.buildMap();
     }
 
     public String decode(String input) {
@@ -62,6 +96,6 @@ public class Components {
     }
 
     public String encode(String input) {
-        
+        return huffTree.encode(input);
     }
 }

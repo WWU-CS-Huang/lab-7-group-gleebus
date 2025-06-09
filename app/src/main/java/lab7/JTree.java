@@ -6,10 +6,12 @@
  */
 
 package lab7;
+import java.util.HashMap;
 
 // JTree is used to construct our code tree, with entries and other JTrees linked together 
 public class JTree {
     public Entry root;
+    public HashMap<Character, String> map = new HashMap<Character, String>();
 
     class Entry {
         public Character value;
@@ -54,6 +56,8 @@ public class JTree {
         return root.frequency;
     }
 
+    // give it a bitstring, it spits out the encoding
+    // if you give anything other than 0 or 1, it spits out "invalid input"
     public String decode(String bitstring) {
         String retString = "";
         Entry currentNode = root;
@@ -81,11 +85,44 @@ public class JTree {
 
             } else {
                 //invalid input
-                return "Invalid input";
+                return "Invalid Input - Encountered non-binary bit " + bitstring.charAt(0);
             }
 
             bitstring = bitstring.substring(1);
         }
         return retString;
     }    
+
+    public String encode(String input) {
+        String retVal = "";
+
+        while (input.length() > 0) {
+            Character temp = input.charAt(0);
+            if (!(map.containsKey(temp))) {
+                return ("String cannot be encoded because character " + temp.toString() + " is not in tree");
+            }
+            String bits = map.get(temp);
+            retVal += bits;
+            input = input.substring(1);
+        }
+
+        return retVal;
+    }
+
+
+    // build the hash map that gives bitstrings when given characters
+    public void buildMap() {
+        recurseMap(root, "");
+    }
+
+    // recursive function of building the map
+    public void recurseMap(Entry e, String s) {
+        if (e.value != null) {
+            map.put(e.value, s);
+            return;
+        }
+
+        recurseMap(e.leftChild, (s + "0"));
+        recurseMap(e.rightChild, (s + "1"));
+    }
 }
