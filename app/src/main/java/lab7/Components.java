@@ -34,7 +34,7 @@ public class Components {
         
         Components c = new Components();
 
-        Scanner sc = new Scanner(new File("sample.txt"));
+        Scanner sc = new Scanner(new File(args[0]));
 
         String input = sc.nextLine();
         //String input = "i love making files it's so fun";
