@@ -14,7 +14,7 @@ public class Components {
     private Heap<JTree, Integer> heap = new Heap<JTree, Integer>();
     private JTree huffTree;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException{
         /*
             Components c = new Components();
             c.countFrequencies("aaabbc");
@@ -34,10 +34,10 @@ public class Components {
         
         Components c = new Components();
 
-        //Scanner sc = new Scanner(new File("Sample.txt"));
+        Scanner sc = new Scanner(new File("sample.txt"));
 
-        //String input = sc.nextLine();
-        String input = "i love making files it's so fun";
+        String input = sc.nextLine();
+        //String input = "i love making files it's so fun";
 
         c.countFrequencies(input);
         c.setupTree();
