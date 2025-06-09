@@ -48,7 +48,13 @@ public class Components {
             System.out.println("Input string: " + input);
             System.out.println("Encoded bitstring: " + encodedInput);
             System.out.println("Decoding of the encoded bitstring: " + decodedEncode);
-       }
+        } 
+
+        boolean same = input.equals(decodedEncode);
+        double compression = encodedInput.length() / input.length() / 8.0;
+        System.out.println("The input and decoded encoded input are the same: " + same);
+        System.out.println("The compression ratio is " + compression);
+        
        
     }
 
